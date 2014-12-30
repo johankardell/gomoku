@@ -3,9 +3,8 @@ define(['boardUI', 'statusUI', 'external/domReady!'], function(boardUI, statusUI
       sui = statusUI.create(document.getElementById('next-player'),
                             document.getElementById('winner'));
 
-
   sui.nextPlayer('black');
-
+ 
   bui.drawBoard();
   bui.drawPiece(0,0, 'w');
   bui.drawPiece(0,17, 'w');

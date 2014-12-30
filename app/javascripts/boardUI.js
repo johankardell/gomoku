@@ -33,8 +33,7 @@ define(function() {
         ctxt.moveTo(0, x);
         ctxt.lineTo(304, x);
         ctxt.stroke();
-      };
-
+      }
     }
 
     function drawPiece(col, row, color) {
@@ -74,7 +73,7 @@ define(function() {
     canvas.addEventListener('click', function(evt) {
       var x, y;
 
-      if(evt.x != undefined && evt.y != undefined) {
+      if(evt.x !== undefined && evt.y !== undefined) {
         x = evt.x;
         y = evt.y;
       }
