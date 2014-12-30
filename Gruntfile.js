@@ -25,10 +25,9 @@ module.exports = function(grunt) {
     express: {
       options: {
       },
-
       dev: {
         options: {
-          script: 'app.js'
+         script: 'server.js'
         }
       }
     },
@@ -44,9 +43,9 @@ module.exports = function(grunt) {
     jshint: {
       files: ['app/javascripts/**/*.js', '!app/javascripts/external/*.js', 'test/specs/*.js'],
       options: {
-          globals: {
-            module: true
-          }
+        globals: {
+          module: true
+        }
       }
     }  
   });
@@ -56,7 +55,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-    
+
   grunt.renameTask('watch', 'originalWatch');
 
   grunt.registerTask('watch', ['express:dev', 'reload', 'karma:watch:start', 'originalWatch']);
