@@ -16,14 +16,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: '*.js', included: false, served: true},
-      {pattern: 'specs/**/*.js', included: false},
-      {pattern: 'test-util/chai.js', included: false},
-      {pattern: 'test-util/sinon-chai.js', included: false},
-      {pattern: 'test-util/expect.js', included: false},
-      {pattern: 'external/lodash.js', included: false},
-      'test-util/sinon-1.7.3.js',
-      'test-util/spec-main.js'
+      { pattern: 'app/javascripts/**/*.js', included: false, served: true },
+      { pattern: 'test/test-util/*.js', included: false },
+      { pattern: 'test/specs/*.spec.js', included: false },
+      'test/test-util/spec-main.js'
     ],
 
     plugins: [
