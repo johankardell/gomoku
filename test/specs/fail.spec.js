@@ -1,7 +1,7 @@
-define(['test-util/expect'], function(expect) {
-  describe('fails', function() {
-    it('fails', function() {
-      expect(3).to.equal(2);
-    });
-  });
+/*jshint -W030 */
+
+describe("A test suite", function() {
+   it('should fail', function() {
+   	 expect(true).to.be.false; 
+   });
 });

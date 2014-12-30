@@ -1,6 +1,8 @@
-define(['boardUI', 'statusUI', 'external/domReady!'], function(boardUI, statusUI){
-  var bui = boardUI.create(),
-      sui = statusUI.create(document.getElementById('next-player'),
+var Main = Main || {};
+
+(function(Main, BoardUI, StatusUI){
+  var bui = BoardUI.create(document.getElementById('board')),
+      sui = StatusUI.create(document.getElementById('next-player'),
                             document.getElementById('winner'));
 
   sui.nextPlayer('black');
@@ -14,4 +16,4 @@ define(['boardUI', 'statusUI', 'external/domReady!'], function(boardUI, statusUI
     bui.drawPiece(col, row, 'w');
     sui.winnerIs('black');
   });
-});
+})(Main, BoardUI, StatusUI);

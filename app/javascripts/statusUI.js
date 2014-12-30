@@ -1,29 +1,20 @@
-define(function() {
+var StatusUI = StatusUI || {};
 
-  function create(nextPlayerElement, winnerElement) {
-
-    function nextPlayer(player) {
-      nextPlayerElement.textContent = 'Next: ' + player;
-    }
-
-    function winnerIs(winner) {
-      winnerElement.textContent = 'Winner is: ' + winner;
-    }
-
-    function clear() {
-      nextPlayerElement.textContent = '';
-      winnerElement.textContent = '';
-    }
-
+(function(StatusUI){
+  StatusUI.create = function(nextPlayerElement, winnerElement) {
     return {
-      nextPlayer: nextPlayer,
-      winnerIs: winnerIs,
-      clear: clear
-    };
-  }
+      nextPlayer: function(player) {
+        nextPlayerElement.textContent = 'Next: ' + player;
+      },
 
-  return {
-    create: create
+      winnerIs: function(winner) {
+        winnerElement.textContent = 'Winner is: ' + winner;
+      },
+
+      clear: function() {
+        nextPlayerElement.textContent = '';
+        winnerElement.textContent = '';
+      }
+    };
   };
-  
-});
+})(StatusUI);
