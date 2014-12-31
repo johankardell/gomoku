@@ -1,19 +1,16 @@
-var Main = Main || {};
+var main = function(){
+  var boardui = new BoardUI(document.getElementById('board'));
+  var statusui = new StatusUI(document.getElementById('next-player'), document.getElementById('winner'));
 
-(function(Main, BoardUI, StatusUI){
-  var bui = BoardUI.create(document.getElementById('board')),
-      sui = StatusUI.create(document.getElementById('next-player'),
-                            document.getElementById('winner'));
+  statusui.nextPlayer('black');
 
-  sui.nextPlayer('black');
- 
-  bui.drawBoard();
-  bui.drawPiece(0,0, 'w');
-  bui.drawPiece(0,17, 'w');
-  bui.drawPiece(17, 0, 'b');
-  bui.drawPiece(17, 17, 'B');
-  bui.whenClicked(function (col, row) {
-    bui.drawPiece(col, row, 'w');
-    sui.winnerIs('black');
+  boardui.drawBoard();
+  boardui.drawPiece(0,0, 'w');
+  boardui.drawPiece(0,17, 'w');
+  boardui.drawPiece(17, 0, 'b');
+  boardui.drawPiece(17, 17, 'B');
+  boardui.whenClicked(function (col, row) {
+    boardui.drawPiece(col, row, 'w');
+    statusui.winnerIs('black');
   });
-})(Main, BoardUI, StatusUI);
+}();

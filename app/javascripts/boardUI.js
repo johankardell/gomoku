@@ -1,106 +1,94 @@
-var BoardUI = BoardUI || {};
+function BoardUI(board){
+  var _canvas = board;
+  var _ctxt = board.getContext('2d');
+  var _clickCallbacks = [];
 
-(function(BoardUI){
-    var canvas;
-    var ctxt;
-    var clickCallbacks = [];
+  _canvas.addEventListener('click', function(evt) {
+    var x, y;
 
-    function addEventListener(){
-      canvas.addEventListener('click', function(evt) {
-        var x, y;
-
-        if(evt.x !== undefined && evt.y !== undefined) {
-          x = evt.x;
-          y = evt.y;
-        }
-        else {  // Firefox method to get the position
-          x = evt.clientX;
-          y = evt.clientY;
-        }
-
-        var rect = canvas.getBoundingClientRect();
-        x -= rect.left;
-        y -= rect.top;
-
-        clickCallbacks.forEach(function(cb) {
-          var col = Math.floor((x+8)/16) - 1;
-          var row = Math.floor((y+8)/16) - 1;
-          if(col >= 0 && col <= 17 && row >= 0 && row <= 17) {
-            cb(col, row);
-          }
-        });
-      });
+    if(evt.x !== undefined && evt.y !== undefined) {
+      x = evt.x;
+      y = evt.y;
+    }
+    else {  // Firefox method to get the position
+      x = evt.clientX;
+      y = evt.clientY;
     }
 
-    BoardUI.create = function(board){
-      canvas = board;
-      ctxt = canvas.getContext('2d');
-    
-    addEventListener();
-    return {
-      drawBoard: function() {
-        var x;
+    var rect = _canvas.getBoundingClientRect();
+    x -= rect.left;
+    y -= rect.top;
 
-        // Clear the canvas
-        // Store the current transformation matrix
-        ctxt.save();
+    _clickCallbacks.forEach(function(cb) {
+      var col = Math.floor((x+8)/16) - 1;
+      var row = Math.floor((y+8)/16) - 1;
+      if(col >= 0 && col <= 17 && row >= 0 && row <= 17) {
+        cb(col, row);
+      }
+    });
+  });
 
-        // Use the identity matrix while clearing the canvas
-        ctxt.setTransform(1, 0, 0, 1, 0, 0);
-        ctxt.clearRect(0, 0, canvas.width, canvas.height);
+  this.drawBoard = function() {
+    var x;
 
-        // Restore the transform
-        ctxt.restore();
+    // Clear the canvas
+    // Store the current transformation matrix
+    _ctxt.save();
 
-        for(x=0; x<=304; x+=16) {
-          // Horizontal lines
-          ctxt.lineWidth = 1;
-          ctxt.beginPath();
-          ctxt.moveTo(x, 0);
-          ctxt.lineTo(x, 304);
-          ctxt.stroke();
+    // Use the identity matrix while clearing the canvas
+    _ctxt.setTransform(1, 0, 0, 1, 0, 0);
+    _ctxt.clearRect(0, 0, _canvas.width, _canvas.height);
 
-          // Vertical lines
-          ctxt.beginPath();
-          ctxt.moveTo(0, x);
-          ctxt.lineTo(304, x);
-          ctxt.stroke();
-        }
-      },
+    // Restore the transform
+    _ctxt.restore();
 
-      drawPiece: function(col, row, color) {
-        var x = col * 16 + 16;
-        var y = row * 16 + 16;
-        var radius = 7;
+    for(x=0; x<=304; x+=16) {
+      // Horizontal lines
+      _ctxt.lineWidth = 1;
+      _ctxt.beginPath();
+      _ctxt.moveTo(x, 0);
+      _ctxt.lineTo(x, 304);
+      _ctxt.stroke();
 
-        var blackfill = ctxt.createRadialGradient(x - radius/2,y - radius/2, 2,x - radius/2, y - radius/2 , radius);
-        blackfill.addColorStop(0, '#676767');
-        blackfill.addColorStop(1, '#000000');
-
-        var whitefill = ctxt.createRadialGradient(x - radius/2,y - radius/2, 2,x - radius/2, y - radius/2 , radius);
-        whitefill.addColorStop(0, '#ffffff');
-        whitefill.addColorStop(1, '#dddddd');
-
-        ctxt.save();
-
-        ctxt.beginPath();
-        ctxt.arc(x, y, radius, 0, 2 * Math.PI);
-
-        ctxt.fillStyle = (color == 'b' || color == 'B') ? blackfill : whitefill;
-
-        ctxt.shadowOffsetX = 1;
-        ctxt.shadowOffsetY = 1;
-        ctxt.shadowColor = "#000";
-        ctxt.shadowBlur = 2;
-
-        ctxt.fill();
-
-        ctxt.restore();
-      },
-
-      whenClicked: function(callback) {
-        clickCallbacks.push(callback);
-      },
-    };
+      // Vertical lines
+      _ctxt.beginPath();
+      _ctxt.moveTo(0, x);
+      _ctxt.lineTo(304, x);
+      _ctxt.stroke();
+    }
   };
-})(BoardUI);
+
+  this.drawPiece = function(col, row, color) {
+    var x = col * 16 + 16;
+    var y = row * 16 + 16;
+    var radius = 7;
+
+    var blackfill = _ctxt.createRadialGradient(x - radius/2,y - radius/2, 2,x - radius/2, y - radius/2 , radius);
+    blackfill.addColorStop(0, '#676767');
+    blackfill.addColorStop(1, '#000000');
+
+    var whitefill = _ctxt.createRadialGradient(x - radius/2,y - radius/2, 2,x - radius/2, y - radius/2 , radius);
+    whitefill.addColorStop(0, '#ffffff');
+    whitefill.addColorStop(1, '#dddddd');
+
+    _ctxt.save();
+
+    _ctxt.beginPath();
+    _ctxt.arc(x, y, radius, 0, 2 * Math.PI);
+
+    _ctxt.fillStyle = (color == 'b' || color == 'B') ? blackfill : whitefill;
+
+    _ctxt.shadowOffsetX = 1;
+    _ctxt.shadowOffsetY = 1;
+    _ctxt.shadowColor = "#000";
+    _ctxt.shadowBlur = 2;
+
+    _ctxt.fill();
+
+    _ctxt.restore();
+  };
+
+  this.whenClicked = function(callback) {
+    _clickCallbacks.push(callback);
+  };
+}
