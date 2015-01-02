@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+  var files = ['app/javascripts/**/*.js', 'test/**/*.js', '!app/javascripts/external/*.js'];
+
   grunt.initConfig({
     karma: {
       options: {
@@ -14,14 +16,14 @@ module.exports = function(grunt) {
 
     watch: {
       karma: {
-        files: ['app/javascripts/**/*.js', 'test/**/*.js'],
+        files: files,
         tasks: ['karma:watch:run'],
         options: {
           livereload: true
         }
       },
       jshint: {
-        files: ['app/javascripts/**/*.js', 'test/**/*.js'],
+        files: files,
         tasks: ['jshint'],
       }
 
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['app/javascripts/**/*.js', '!app/javascripts/external/*.js', 'test/specs/*.js'],
+      files: files,
       options: {
         reporter: require('jshint-stylish')
       }
