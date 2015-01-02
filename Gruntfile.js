@@ -12,10 +12,14 @@ module.exports = function(grunt) {
       }
     },
 
-    originalWatch: {
+    watch: {
+      jshint: {
+        files: ['app/javascripts/**/*.js', 'test/**/*.js'],
+        tasks: ['jshint'],
+      },
       karma: {
         files: ['app/javascripts/**/*.js', 'test/**/*.js'],
-        tasks: ['jshint', 'karma:watch:run'],
+        tasks: ['karma:watch:run'],
         options: {
           livereload: true
         }
@@ -43,21 +47,17 @@ module.exports = function(grunt) {
     jshint: {
       files: ['app/javascripts/**/*.js', '!app/javascripts/external/*.js', 'test/specs/*.js'],
       options: {
-        globals: {
-          module: true
-        }
+        reporter: require('jshint-stylish')
       }
     }  
   });
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-reload');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.renameTask('watch', 'originalWatch');
-
-  grunt.registerTask('watch', ['express:dev', 'reload', 'karma:watch:start', 'originalWatch']);
+  grunt.registerTask('default', ['express:dev', 'reload', 'karma:watch:start', 'watch']);
   grunt.registerTask('test', ['karma:unit']);
 };
