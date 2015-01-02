@@ -18,6 +18,7 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-chai',
       'karma-phantomjs-launcher',
+      'karma-mocha-reporter'
     ],
 
     // list of files to exclude
@@ -27,7 +28,7 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['dots'],
+    reporters: ['mocha'],
 
     // web server port
     port: 9876,

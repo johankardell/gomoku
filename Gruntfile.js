@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     karma: {
       options: {
-        configFile: 'karma.conf.js'
+        configFile: 'karma.conf.js',
       },
       watch: {
         background: true
@@ -13,17 +13,18 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      jshint: {
-        files: ['app/javascripts/**/*.js', 'test/**/*.js'],
-        tasks: ['jshint'],
-      },
       karma: {
         files: ['app/javascripts/**/*.js', 'test/**/*.js'],
         tasks: ['karma:watch:run'],
         options: {
           livereload: true
         }
+      },
+      jshint: {
+        files: ['app/javascripts/**/*.js', 'test/**/*.js'],
+        tasks: ['jshint'],
       }
+
     },
 
     express: {
