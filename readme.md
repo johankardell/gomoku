@@ -1,9 +1,9 @@
 # Iteration #1 (Visuals) #
 -  An empty game board should be displayed when a game is started
--  When the user clicks a position, a game piece should be drawn
+-  The color to be played next should be displayed
 -  Black always starts
 -  When a player has positioned a game piece, it's the other player's turn
--  The color to be played next should be displayed
+-  When the user clicks a position, a game piece should be drawn
 
 # Iteration #2 (Game logic)  #
  - When a player has five-in-a-row, the game is won

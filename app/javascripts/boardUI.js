@@ -76,7 +76,7 @@ function BoardUI(board){
     _ctxt.beginPath();
     _ctxt.arc(x, y, radius, 0, 2 * Math.PI);
 
-    _ctxt.fillStyle = (color == 'b' || color == 'B') ? blackfill : whitefill;
+    _ctxt.fillStyle = (color[0] === 'b' || color[0] === 'B') ? blackfill : whitefill;
 
     _ctxt.shadowOffsetX = 1;
     _ctxt.shadowOffsetY = 1;
@@ -88,7 +88,7 @@ function BoardUI(board){
     _ctxt.restore();
   };
 
-  this.whenClicked = function(callback) {
+  this.addClickHandler = function(callback) {
     _clickCallbacks.push(callback);
   };
 }
