@@ -1,5 +1,5 @@
-function BoardUI(board){
-  var _canvas = board;
+function BoardUI(){
+  var _canvas = document.getElementById('board');
   var _ctxt = board.getContext('2d');
   var _clickCallbacks = [];
 
@@ -27,6 +27,10 @@ function BoardUI(board){
       }
     });
   });
+
+  this.addClickHandler = function(callback) {
+    _clickCallbacks.push(callback);
+  };
 
   this.drawBoard = function() {
     var x;
@@ -86,9 +90,5 @@ function BoardUI(board){
     _ctxt.fill();
 
     _ctxt.restore();
-  };
-
-  this.addClickHandler = function(callback) {
-    _clickCallbacks.push(callback);
   };
 }
