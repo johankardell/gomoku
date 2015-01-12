@@ -130,6 +130,4 @@ describe('Board', function() {
 			expect(board.winner()).to.equal('Black');
 		});
 	});
-
-
 });

@@ -106,4 +106,19 @@ function Board(){
 		}
 		return winner;
 	};
+
+	/* For debugging purposes */
+
+    this.print = function(){
+      var col, row, row_output;
+      for(row = 0; row < dimension; row++){
+        row_output = "";
+        for(col = 0; col < dimension; col++){
+          row_output = row_output + " " + (board[col][row] !== undefined ? board[col][row][0] : "_");
+        }
+        console.log(row_output);
+      }
+    }
+
+	/* **************************************************  */
 }
