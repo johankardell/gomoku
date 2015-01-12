@@ -1,5 +1,5 @@
 var main = function(){
-  var boardui = new BoardUI(document.getElementById('board'));
+  var boardui = new BoardUI();
   var statusui = new StatusUI(document.getElementById('next-player'), document.getElementById('winner'));
 
   statusui.nextPlayer('black');
@@ -9,7 +9,7 @@ var main = function(){
   boardui.drawPiece(0,17, 'w');
   boardui.drawPiece(17, 0, 'b');
   boardui.drawPiece(17, 17, 'B');
-  boardui.whenClicked(function (col, row) {
+  boardui.addClickHandler(function (col, row) {
     boardui.drawPiece(col, row, 'w');
     statusui.winnerIs('black');
   });
