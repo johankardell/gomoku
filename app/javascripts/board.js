@@ -4,11 +4,11 @@ function Board(){
 
 	// Create the board
 	(function(){
-		for(var x=0; x<dimension; x++){
+		for(var y=0; y<dimension; y++){
 			board.push([]);
-			var xumn = board[x];
-			for(var y=0; y<dimension; y++){
-				xumn.push(undefined);
+			var row = board[y];
+			for(var x=0; x<dimension; x++){
+				row.push(undefined);
 			}
 		}
 	})();
@@ -18,7 +18,7 @@ function Board(){
 	function horizontalWinnerAt(x,y){
 		var result = board[x][y];
 
-		if(x > dimension-5){
+		if(x > (dimension-5)){
 			return undefined;
 		}
 
@@ -35,7 +35,7 @@ function Board(){
 	function verticalWinnerAt(x,y){
 		var result = board[x][y];
 
-		if(y > dimension-5){
+		if(y > (dimension-5)){
 			return undefined;
 		}
 
@@ -43,6 +43,40 @@ function Board(){
 			board[x][y+2] === result &&
 			board[x][y+3] === result &&
 			board[x][y+4] === result) {
+			return result;
+		}
+
+		return undefined;
+	}
+
+	function diagonalWinnerSEAt(x,y){
+		var result = board[x][y];
+
+		if(x > (dimension-5) || y > (dimension-5)){
+			return undefined;
+		}
+
+		if(board[x+1][y+1] === result &&
+			board[x+2][y+2] === result &&
+			board[x+3][y+3] === result &&
+			board[x+4][y+4] === result) {
+			return result;
+		}
+
+		return undefined;
+	}
+
+	function diagonalWinnerNEAt(x,y){
+		var result = board[x][y];
+
+		if(x > (dimension-5) || y < 4){
+			return undefined;
+		}
+
+		if(board[x+1][y-1] === result &&
+			board[x+2][y-2] === result &&
+			board[x+3][y-3] === result &&
+			board[x+4][y-4] === result) {
 			return result;
 		}
 
@@ -60,7 +94,7 @@ function Board(){
 
 		for(var x=0; x<dimension; x++){
 			for(var y=0; y<dimension; y++){
-				winner = horizontalWinnerAt(x,y) || verticalWinnerAt(x,y);
+				winner = horizontalWinnerAt(x,y) || verticalWinnerAt(x,y) || diagonalWinnerSEAt(x,y) || diagonalWinnerNEAt(x,y);
 
 				if(winner === 'b'){
 					return 'Black';
